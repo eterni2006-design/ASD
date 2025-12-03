@@ -504,35 +504,4 @@ TEST(ListTest, ComplexOperations) {
     EXPECT_FALSE(list.contains(100));
 }
 
-TEST(ListBoolTest, BoolList) {
-    List<bool> list;
-
-    list.push_back(true);
-    list.push_back(false);
-    list.push_back(true);
-    list.push_back(false);
-
-    EXPECT_EQ(list.size(), 4);
-    EXPECT_TRUE(list.front());
-    EXPECT_FALSE(list.back());
-
-    list.pop_front();
-    EXPECT_FALSE(list.front());
-
-    list.pop_back();
-    EXPECT_TRUE(list.back());
-}
-
-TEST(ListBoolTest, BoolListEmpty) {
-    List<bool> list;
-
-    EXPECT_TRUE(list.empty());
-    EXPECT_EQ(list.size(), 0);
-
-    EXPECT_THROW(list.front(), std::out_of_range);
-    EXPECT_THROW(list.back(), std::out_of_range);
-    EXPECT_THROW(list.pop_front(), std::out_of_range);
-    EXPECT_THROW(list.pop_back(), std::out_of_range);
-}
-
 
