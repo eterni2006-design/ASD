@@ -1,1 +1,14 @@
 build/
+x64/
+*.vcxproj*
+ASD/
+.vs/
+*.obj
+*.pdb
+*.idb
+*.tlog
+CMakeFiles/
+CMakeCache.txt
+Debug/
+Release/
+*.sln
