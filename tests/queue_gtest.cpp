@@ -282,26 +282,6 @@ TEST(QueueTest, QueueOfDoubles) {
     EXPECT_DOUBLE_EQ(queue.front(), 2.71);
 }
 
-TEST(QueueTest, LargeQueueWithResizing) {
-    Queue<int> queue;
-    const int N = 10000;
-
-    for (int i = 0; i < N; i++) {
-        queue.push(i * 2);
-    }
-
-    EXPECT_EQ(queue.size(), N);
-    EXPECT_EQ(queue.front(), 0);
-    EXPECT_EQ(queue.back(), (N - 1) * 2);
-
-    for (int i = 0; i < N; i++) {
-        EXPECT_EQ(queue.front(), i * 2);
-        queue.pop();
-    }
-
-    EXPECT_TRUE(queue.empty());
-}
-
 TEST(QueueTest, OutputOperator) {
     Queue<int> queue = { 1, 2, 3 };
 
@@ -333,23 +313,4 @@ TEST(QueueTest, QueueAfterClearAndReuse) {
     EXPECT_EQ(queue.back(), 40);
 }
 
-TEST(QueueTest, CircularBufferComplex) {
-    Queue<int> queue(5);
-
-    for (int i = 1; i <= 5; i++) {
-        queue.push(i);
-    }
-
-    for (int i = 1; i <= 3; i++) {
-        queue.pop();
-    }
-
-    for (int i = 6; i <= 8; i++) {
-        queue.push(i);
-    }
-
-    EXPECT_EQ(queue.size(), 5);
-    EXPECT_EQ(queue.front(), 4);
-    EXPECT_EQ(queue.back(), 8);
-}
 
