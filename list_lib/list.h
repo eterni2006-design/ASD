@@ -15,7 +15,7 @@ private:
 
     Node* head;
     Node* tail;
-    size_t list_size;
+    int list_size;
 
     // Вспомогательная функция для очистки списка
     void clear_list() {
@@ -60,15 +60,6 @@ public:
         clear_list();
     }
 
-    // Оператор присваивания
-    List& operator=(const List& other) {
-        if (this != &other) {
-            clear_list();
-            copy_list(other);
-        }
-        return *this;
-    }
-
     // Добавление элемента в начало списка
     void push_front(const T& value) {
         Node* new_node = new Node(value);
@@ -98,7 +89,7 @@ public:
     }
 
     // Вставка элемента по позиции
-    void insert(size_t position, const T& value) {
+    void insert(int position, const T& value) {
         if (position > list_size) {
             throw std::out_of_range("Position out of range");
         }
@@ -113,7 +104,7 @@ public:
             Node* new_node = new Node(value);
             Node* current = head;
 
-            for (size_t i = 0; i < position - 1; i++) {
+            for (int i = 0; i < position - 1; i++) {
                 current = current->next;
             }
 
@@ -164,7 +155,7 @@ public:
     }
 
     // Удаление элемента по позиции
-    void erase(size_t position) {
+    void erase(int position) {
         if (position >= list_size) {
             throw std::out_of_range("Position out of range");
         }
@@ -177,7 +168,7 @@ public:
         }
         else {
             Node* current = head;
-            for (size_t i = 0; i < position - 1; i++) {
+            for (int i = 0; i < position - 1; i++) {
                 current = current->next;
             }
 
@@ -189,67 +180,37 @@ public:
         }
     }
 
-    // Получение первого элемента
-    T& front() {
-        if (empty()) {
-            throw std::out_of_range("List is empty");
-        }
-        return head->data;
-    }
-
-    const T& front() const {
-        if (empty()) {
-            throw std::out_of_range("List is empty");
-        }
-        return head->data;
-    }
-
-    // Получение последнего элемента
-    T& back() {
-        if (empty()) {
-            throw std::out_of_range("List is empty");
-        }
-        return tail->data;
-    }
-
-    const T& back() const {
-        if (empty()) {
-            throw std::out_of_range("List is empty");
-        }
-        return tail->data;
-    }
-
     // Получение элемента по индексу
-    T& at(size_t index) {
+    T& at(int index) {
         if (index >= list_size) {
             throw std::out_of_range("Index out of range");
         }
 
         Node* current = head;
-        for (size_t i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             current = current->next;
         }
         return current->data;
     }
 
-    const T& at(size_t index) const {
+    const T& at(int index) const {
         if (index >= list_size) {
             throw std::out_of_range("Index out of range");
         }
 
         Node* current = head;
-        for (size_t i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             current = current->next;
         }
         return current->data;
     }
 
     // Оператор [] для доступа по индексу
-    T& operator[](size_t index) {
+    T& operator[](int index) {
         return at(index);
     }
 
-    const T& operator[](size_t index) const {
+    const T& operator[](int index) const {
         return at(index);
     }
 
@@ -259,7 +220,7 @@ public:
     }
 
     // Размер списка
-    size_t size() const {
+    int size() const {
         return list_size;
     }
 
@@ -269,9 +230,9 @@ public:
     }
 
     // Поиск элемента
-    size_t find(const T& value) const {
+    int find(const T& value) const {
         Node* current = head;
-        size_t index = 0;
+        int index = 0;
 
         while (current != nullptr) {
             if (current->data == value) {
@@ -280,40 +241,16 @@ public:
             current = current->next;
             index++;
         }
-        return list_size; // Возвращаем size если не нашли
+        return list_size;
     }
 
-    // Проверка наличия элемента
-    bool contains(const T& value) const {
-        return find(value) != list_size;
-    }
-
-    // Реверс списка
-    void reverse() {
-        if (empty() || head == tail) {
-            return;
+    // Оператор присваивания
+    List& operator=(const List& other) {
+        if (this != &other) {
+            clear_list();
+            copy_list(other);
         }
-
-        Node* prev = nullptr;
-        Node* current = head;
-        Node* next = nullptr;
-        tail = head;
-
-        while (current != nullptr) {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
-        }
-
-        head = prev;
-    }
-
-    // Обмен содержимого с другим списком
-    void swap(List& other) {
-        std::swap(head, other.head);
-        std::swap(tail, other.tail);
-        std::swap(list_size, other.list_size);
+        return *this;
     }
 
     // Оператор сравнения
@@ -389,7 +326,7 @@ public:
         while (current != nullptr) {
             os << current->data;
             if (current->next != nullptr) {
-                os << " -> ";
+                os << ", ";
             }
             current = current->next;
         }

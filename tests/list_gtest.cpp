@@ -11,8 +11,8 @@ TEST(ListTest, ConstructorWithInitializerList) {
     List<int> list = { 1, 2, 3, 4, 5 };
     EXPECT_FALSE(list.empty());
     EXPECT_EQ(list.size(), 5);
-    EXPECT_EQ(list.front(), 1);
-    EXPECT_EQ(list.back(), 5);
+    EXPECT_EQ(list.at(0), 1);
+    EXPECT_EQ(list.at(list.size()-1), 5);
 }
 
 TEST(ListTest, CopyConstructor) {
@@ -20,14 +20,14 @@ TEST(ListTest, CopyConstructor) {
     List<int> list2 = list1;
 
     EXPECT_EQ(list1.size(), list2.size());
-    EXPECT_EQ(list1.front(), list2.front());
-    EXPECT_EQ(list1.back(), list2.back());
+    EXPECT_EQ(list1.at(0), list2.at(0));
+    EXPECT_EQ(list1.at(list1.size()-1), list2.at(list2.size()-1));
 
     list1.pop_front();
     EXPECT_EQ(list1.size(), 4);
     EXPECT_EQ(list2.size(), 5);
-    EXPECT_EQ(list1.front(), 2);
-    EXPECT_EQ(list2.front(), 1);
+    EXPECT_EQ(list1.at(0), 2);
+    EXPECT_EQ(list2.at(0), 1);
 }
 
 TEST(ListTest, AssignmentOperator) {
@@ -36,8 +36,8 @@ TEST(ListTest, AssignmentOperator) {
     list2 = list1;
 
     EXPECT_EQ(list1.size(), list2.size());
-    EXPECT_EQ(list1.front(), list2.front());
-    EXPECT_EQ(list1.back(), list2.back());
+    EXPECT_EQ(list1.at(0), list2.at(0));
+    EXPECT_EQ(list1.at(list1.size()-1), list2.at(list2.size()-1));
 
     list1.push_back(4);
     EXPECT_EQ(list1.size(), 4);
@@ -49,8 +49,8 @@ TEST(ListTest, SelfAssignment) {
     list = list;
 
     EXPECT_EQ(list.size(), 3);
-    EXPECT_EQ(list.front(), 1);
-    EXPECT_EQ(list.back(), 3);
+    EXPECT_EQ(list.at(0), 1);
+    EXPECT_EQ(list.at(list.size()-1), 3);
 }
 
 TEST(ListTest, PushBack) {
@@ -59,18 +59,18 @@ TEST(ListTest, PushBack) {
     list.push_back(10);
     EXPECT_FALSE(list.empty());
     EXPECT_EQ(list.size(), 1);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 10);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 10);
 
     list.push_back(20);
     EXPECT_EQ(list.size(), 2);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 20);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 20);
 
     list.push_back(30);
     EXPECT_EQ(list.size(), 3);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 30);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 30);
 }
 
 TEST(ListTest, PushFront) {
@@ -79,33 +79,33 @@ TEST(ListTest, PushFront) {
     list.push_front(10);
     EXPECT_FALSE(list.empty());
     EXPECT_EQ(list.size(), 1);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 10);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 10);
 
     list.push_front(20);
     EXPECT_EQ(list.size(), 2);
-    EXPECT_EQ(list.front(), 20);
-    EXPECT_EQ(list.back(), 10);
+    EXPECT_EQ(list.at(0), 20);
+    EXPECT_EQ(list.at(list.size()-1), 10);
 
     list.push_front(30);
     EXPECT_EQ(list.size(), 3);
-    EXPECT_EQ(list.front(), 30);
-    EXPECT_EQ(list.back(), 10);
+    EXPECT_EQ(list.at(0), 30);
+    EXPECT_EQ(list.at(list.size()-1), 10);
 }
 
 TEST(ListTest, PopFront) {
     List<int> list = { 10, 20, 30 };
 
-    EXPECT_EQ(list.front(), 10);
+    EXPECT_EQ(list.at(0), 10);
     list.pop_front();
     EXPECT_EQ(list.size(), 2);
-    EXPECT_EQ(list.front(), 20);
-    EXPECT_EQ(list.back(), 30);
+    EXPECT_EQ(list.at(0), 20);
+    EXPECT_EQ(list.at(list.size()-1), 30);
 
     list.pop_front();
     EXPECT_EQ(list.size(), 1);
-    EXPECT_EQ(list.front(), 30);
-    EXPECT_EQ(list.back(), 30);
+    EXPECT_EQ(list.at(0), 30);
+    EXPECT_EQ(list.at(list.size()-1), 30);
 
     list.pop_front();
     EXPECT_TRUE(list.empty());
@@ -115,16 +115,16 @@ TEST(ListTest, PopFront) {
 TEST(ListTest, PopBack) {
     List<int> list = { 10, 20, 30 };
 
-    EXPECT_EQ(list.back(), 30);
+    EXPECT_EQ(list.at(list.size()-1), 30);
     list.pop_back();
     EXPECT_EQ(list.size(), 2);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 20);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 20);
 
     list.pop_back();
     EXPECT_EQ(list.size(), 1);
-    EXPECT_EQ(list.front(), 10);
-    EXPECT_EQ(list.back(), 10);
+    EXPECT_EQ(list.at(0), 10);
+    EXPECT_EQ(list.at(list.size()-1), 10);
 
     list.pop_back();
     EXPECT_TRUE(list.empty());
@@ -146,20 +146,20 @@ TEST(ListTest, PopBackEmptyList) {
 TEST(ListTest, FrontEmptyList) {
     List<int> list;
 
-    EXPECT_THROW(list.front(), std::out_of_range);
+    EXPECT_THROW(list.at(0), std::out_of_range);
 }
 
 TEST(ListTest, BackEmptyList) {
     List<int> list;
 
-    EXPECT_THROW(list.back(), std::out_of_range);
+    EXPECT_THROW(list.at(list.size()), std::out_of_range);
 }
 
 TEST(ListTest, ConstFrontAndBack) {
     const List<int> list = { 1, 2, 3, 4, 5 };
 
-    EXPECT_EQ(list.front(), 1);
-    EXPECT_EQ(list.back(), 5);
+    EXPECT_EQ(list.at(0), 1);
+    EXPECT_EQ(list.at(list.size()-1), 5);
     EXPECT_EQ(list.size(), 5);
 }
 
@@ -199,7 +199,7 @@ TEST(ListTest, InsertAtBeginning) {
 
     list.insert(0, 1);
     EXPECT_EQ(list.size(), 4);
-    EXPECT_EQ(list.front(), 1);
+    EXPECT_EQ(list.at(0), 1);
     EXPECT_EQ(list[0], 1);
     EXPECT_EQ(list[1], 2);
 }
@@ -209,7 +209,7 @@ TEST(ListTest, InsertAtEnd) {
 
     list.insert(3, 4);
     EXPECT_EQ(list.size(), 4);
-    EXPECT_EQ(list.back(), 4);
+    EXPECT_EQ(list.at(list.size()-1), 4);
     EXPECT_EQ(list[2], 3);
     EXPECT_EQ(list[3], 4);
 }
@@ -236,7 +236,7 @@ TEST(ListTest, EraseAtBeginning) {
 
     list.erase(0);
     EXPECT_EQ(list.size(), 3);
-    EXPECT_EQ(list.front(), 2);
+    EXPECT_EQ(list.at(0), 2);
     EXPECT_EQ(list[0], 2);
     EXPECT_EQ(list[1], 3);
     EXPECT_EQ(list[2], 4);
@@ -247,7 +247,7 @@ TEST(ListTest, EraseAtEnd) {
 
     list.erase(3);
     EXPECT_EQ(list.size(), 3);
-    EXPECT_EQ(list.back(), 3);
+    EXPECT_EQ(list.at(list.size()-1), 3);
     EXPECT_EQ(list[0], 1);
     EXPECT_EQ(list[1], 2);
     EXPECT_EQ(list[2], 3);
@@ -280,8 +280,7 @@ TEST(ListTest, Clear) {
 
     EXPECT_TRUE(list.empty());
     EXPECT_EQ(list.size(), 0);
-    EXPECT_THROW(list.front(), std::out_of_range);
-    EXPECT_THROW(list.back(), std::out_of_range);
+    EXPECT_THROW(list.at(0), std::out_of_range);
 }
 
 TEST(ListTest, Find) {
@@ -291,64 +290,6 @@ TEST(ListTest, Find) {
     EXPECT_EQ(list.find(30), 2);
     EXPECT_EQ(list.find(50), 4);
     EXPECT_EQ(list.find(100), list.size());
-}
-
-TEST(ListTest, Contains) {
-    List<int> list = { 1, 2, 3, 4, 5 };
-
-    EXPECT_TRUE(list.contains(1));
-    EXPECT_TRUE(list.contains(3));
-    EXPECT_TRUE(list.contains(5));
-    EXPECT_FALSE(list.contains(10));
-    EXPECT_FALSE(list.contains(0));
-}
-
-TEST(ListTest, Reverse) {
-    List<int> list = { 1, 2, 3, 4, 5 };
-
-    list.reverse();
-
-    EXPECT_EQ(list.size(), 5);
-    EXPECT_EQ(list.front(), 5);
-    EXPECT_EQ(list.back(), 1);
-    EXPECT_EQ(list[0], 5);
-    EXPECT_EQ(list[1], 4);
-    EXPECT_EQ(list[2], 3);
-    EXPECT_EQ(list[3], 2);
-    EXPECT_EQ(list[4], 1);
-}
-
-TEST(ListTest, ReverseEmpty) {
-    List<int> list;
-
-    list.reverse();
-    EXPECT_TRUE(list.empty());
-}
-
-TEST(ListTest, ReverseSingleElement) {
-    List<int> list = { 42 };
-
-    list.reverse();
-    EXPECT_EQ(list.size(), 1);
-    EXPECT_EQ(list.front(), 42);
-    EXPECT_EQ(list.back(), 42);
-}
-
-TEST(ListTest, Swap) {
-    List<int> list1 = { 1, 2, 3 };
-    List<int> list2 = { 4, 5, 6, 7 };
-
-    size_t size1 = list1.size();
-    size_t size2 = list2.size();
-
-    list1.swap(list2);
-
-    EXPECT_EQ(list1.size(), size2);
-    EXPECT_EQ(list2.size(), size1);
-    EXPECT_EQ(list1.front(), 4);
-    EXPECT_EQ(list1.back(), 7);
-    EXPECT_EQ(list2.front(), 1);
-    EXPECT_EQ(list2.back(), 3);
 }
 
 TEST(ListTest, EqualityOperator) {
@@ -422,15 +363,15 @@ TEST(ListTest, ManyOperations) {
     }
 
     EXPECT_EQ(list.size(), N);
-    EXPECT_EQ(list.front(), 0);
-    EXPECT_EQ(list.back(), N - 1);
+    EXPECT_EQ(list.at(0), 0);
+    EXPECT_EQ(list.at(list.size()-1), N - 1);
 
     for (int i = 0; i < N / 2; i++) {
         list.pop_front();
     }
 
     EXPECT_EQ(list.size(), N / 2);
-    EXPECT_EQ(list.front(), N / 2);
+    EXPECT_EQ(list.at(0), N / 2);
 
     list.clear();
     EXPECT_TRUE(list.empty());
@@ -440,8 +381,8 @@ TEST(ListTest, ManyOperations) {
     }
 
     EXPECT_EQ(list.size(), N);
-    EXPECT_EQ(list.front(), N - 1);
-    EXPECT_EQ(list.back(), 0);
+    EXPECT_EQ(list.at(0), N - 1);
+    EXPECT_EQ(list.at(list.size()-1), 0);
 }
 
 TEST(ListTest, CharList) {
@@ -451,11 +392,11 @@ TEST(ListTest, CharList) {
     list.push_back('b');
     list.push_back('c');
 
-    EXPECT_EQ(list.front(), 'a');
-    EXPECT_EQ(list.back(), 'c');
+    EXPECT_EQ(list.at(0), 'a');
+    EXPECT_EQ(list.at(list.size()-1), 'c');
 
     list.pop_front();
-    EXPECT_EQ(list.front(), 'b');
+    EXPECT_EQ(list.at(0), 'b');
 }
 
 TEST(ListTest, DoubleList) {
@@ -465,11 +406,11 @@ TEST(ListTest, DoubleList) {
     list.push_back(2.71);
     list.push_back(1.41);
 
-    EXPECT_DOUBLE_EQ(list.front(), 3.14);
-    EXPECT_DOUBLE_EQ(list.back(), 1.41);
+    EXPECT_DOUBLE_EQ(list.at(0), 3.14);
+    EXPECT_DOUBLE_EQ(list.at(list.size()-1), 1.41);
 
     list.pop_front();
-    EXPECT_DOUBLE_EQ(list.front(), 2.71);
+    EXPECT_DOUBLE_EQ(list.at(0), 2.71);
 }
 
 TEST(ListTest, OutputOperator) {
@@ -480,28 +421,8 @@ TEST(ListTest, OutputOperator) {
 
     std::string result = ss.str();
     EXPECT_TRUE(result.find("List (size: 3") != std::string::npos);
-    EXPECT_TRUE(result.find("1 -> 2 -> 3") != std::string::npos);
+    EXPECT_TRUE(result.find("1, 2, 3") != std::string::npos);
 }
 
-TEST(ListTest, ComplexOperations) {
-    List<int> list;
-
-    for (int i = 0; i < 10; i++) {
-        list.push_back(i);
-    }
-
-    list.insert(5, 99);
-    EXPECT_EQ(list[5], 99);
-
-    list.erase(3);
-    EXPECT_EQ(list[3], 4);
-
-    list.reverse();
-    EXPECT_EQ(list.front(), 9);
-    EXPECT_EQ(list.back(), 0);
-
-    EXPECT_TRUE(list.contains(99));
-    EXPECT_FALSE(list.contains(100));
-}
 
 
