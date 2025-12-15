@@ -16,13 +16,11 @@ private:
     void resize(size_t new_capacity) {
         T* new_data = new T[new_capacity];
 
-        // Копируем элементы в новый массив
         for (size_t i = 0; i < queue_size; i++) {
             size_t old_index = (front_index + i) % capacity;
             new_data[i] = data[old_index];
         }
 
-        // Освобождаем старую память
         delete[] data;
         data = new_data;
         capacity = new_capacity;
@@ -84,8 +82,6 @@ public:
     {
         if (capacity > 0) {
             data = new T[capacity];
-
-            // Копируем элементы в правильном порядке
             for (size_t i = 0; i < queue_size; i++) {
                 size_t other_index = (other.front_index + i) % other.capacity;
                 data[i] = other.data[other_index];
@@ -94,34 +90,6 @@ public:
         else {
             data = nullptr;
         }
-    }
-
-    // Оператор присваивания
-    Queue& operator=(const Queue& other) {
-        if (this != &other) {
-            // Освобождаем старую память
-            delete[] data;
-
-            // Копируем данные
-            capacity = other.capacity;
-            queue_size = other.queue_size;
-            front_index = 0;
-            back_index = queue_size;
-
-            if (capacity > 0) {
-                data = new T[capacity];
-
-                // Копируем элементы в правильном порядке
-                for (size_t i = 0; i < queue_size; i++) {
-                    size_t other_index = (other.front_index + i) % other.capacity;
-                    data[i] = other.data[other_index];
-                }
-            }
-            else {
-                data = nullptr;
-            }
-        }
-        return *this;
     }
 
     // Деструктор
@@ -147,7 +115,6 @@ public:
         front_index = (front_index + 1) % capacity;
         queue_size--;
 
-        // Если очередь пуста, сбрасываем индексы
         if (empty()) {
             front_index = 0;
             back_index = 0;
@@ -222,6 +189,15 @@ public:
         std::swap(front_index, other.front_index);
         std::swap(back_index, other.back_index);
         std::swap(queue_size, other.queue_size);
+    }
+
+    // Оператор присваивания
+    Queue& operator=(const Queue& other) {
+        if (this != &other) {
+            Queue temp(other);
+            swap(temp);
+        }
+        return *this;
     }
 
     // Оператор сравнения
