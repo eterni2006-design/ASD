@@ -14,12 +14,10 @@ private:
     void resize(size_t new_capacity) {
         T* new_data = new T[new_capacity];
 
-        // Копируем существующие элементы
         for (size_t i = 0; i < top_index; i++) {
             new_data[i] = data[i];
         }
 
-        // Освобождаем старую память
         delete[] data;
         data = new_data;
         capacity = new_capacity;
@@ -72,29 +70,6 @@ public:
         else {
             data = nullptr;
         }
-    }
-
-    // Оператор присваивания
-    Stack& operator=(const Stack& other) {
-        if (this != &other) {
-            // Освобождаем старую память
-            delete[] data;
-
-            // Копируем данные
-            capacity = other.capacity;
-            top_index = other.top_index;
-
-            if (capacity > 0) {
-                data = new T[capacity];
-                for (size_t i = 0; i < top_index; i++) {
-                    data[i] = other.data[i];
-                }
-            }
-            else {
-                data = nullptr;
-            }
-        }
-        return *this;
     }
 
     // Деструктор
@@ -159,10 +134,19 @@ public:
     }
 
     // Обмен содержимого с другим стеком
-    void swap(Stack& other) {
+    void swap(Stack& other) noexcept {
         std::swap(data, other.data);
         std::swap(capacity, other.capacity);
         std::swap(top_index, other.top_index);
+    }
+
+    // Оператор присваивания
+    Stack& operator=(const Stack& other) {
+        if (this != &other) {
+            Stack temp(other);
+            swap(temp);
+        }
+        return *this;
     }
 
     // Оператор сравнения
