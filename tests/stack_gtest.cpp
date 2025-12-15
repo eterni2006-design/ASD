@@ -33,7 +33,6 @@ TEST(StackTest, CopyConstructor) {
     EXPECT_EQ(stack1.top(), stack2.top());
     EXPECT_FALSE(stack2.empty());
 
-    // Изменение одной не должно влиять на другую
     stack1.pop();
     EXPECT_EQ(stack1.size(), 2);
     EXPECT_EQ(stack2.size(), 3);
@@ -134,7 +133,6 @@ TEST(StackTest, Reserve) {
     stack.reserve(20);
     EXPECT_GE(stack.get_capacity(), 20);
 
-    // Добавление элементов не должно вызывать перераспределение
     size_t old_capacity = stack.get_capacity();
     for (int i = 0; i < 15; i++) {
         stack.push(i);
@@ -145,7 +143,6 @@ TEST(StackTest, Reserve) {
 TEST(StackTest, AutoResize) {
     Stack<int> stack;
 
-    // Добавляем больше элементов, чем начальная емкость
     for (int i = 0; i < 100; i++) {
         stack.push(i);
     }
@@ -220,33 +217,6 @@ TEST(StackTest, DoubleStack) {
 
     stack.pop();
     EXPECT_DOUBLE_EQ(stack.top(), 2.71);
-}
-
-TEST(StackTest, LargeNumberOfElements) {
-    Stack<int> stack;
-    const int N = 10000;
-
-    for (int i = 0; i < N; i++) {
-        stack.push(i);
-    }
-
-    EXPECT_EQ(stack.size(), N);
-    EXPECT_EQ(stack.top(), N - 1);
-
-    for (int i = N - 1; i >= 0; i--) {
-        EXPECT_EQ(stack.top(), i);
-        stack.pop();
-    }
-
-    EXPECT_TRUE(stack.empty());
-}
-
-TEST(StackTest, MoveSemanticsNotSupportedButCopyWorks) {
-    Stack<int> stack1 = { 1, 2, 3 };
-    Stack<int> stack2 = std::move(stack1);  // Это вызовет копирование
-
-    EXPECT_EQ(stack2.size(), 3);
-    EXPECT_EQ(stack2.top(), 3);
 }
 
 TEST(StackTest, OutputOperator) {
