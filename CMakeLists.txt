@@ -17,8 +17,10 @@ add_subdirectory(lib_easy_example)    # подключаем дополните�
 add_subdirectory(stack_lib)
 add_subdirectory(queue_lib)
 add_subdirectory(list_lib)
+add_subdirectory(st_q_onlist)
 
 add_subdirectory(main)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
+
 
 option(BTEST "build test?" ON)        # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
 
