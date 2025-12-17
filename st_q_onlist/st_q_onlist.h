@@ -17,7 +17,7 @@ private:
     Node* tail;
     int list_size;
 
-    // Вспомогательная функция для очистки списка
+    // Г‚Г±ГЇГ®Г¬Г®ГЈГ ГІГҐГ«ГјГ­Г Гї ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г®Г·ГЁГ±ГІГЄГЁ Г±ГЇГЁГ±ГЄГ 
     void clear_list() {
         Node* current = head;
         while (current != nullptr) {
@@ -30,7 +30,7 @@ private:
         list_size = 0;
     }
 
-    // Вспомогательная функция для копирования списка
+    // Г‚Г±ГЇГ®Г¬Г®ГЈГ ГІГҐГ«ГјГ­Г Гї ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї Г±ГЇГЁГ±ГЄГ 
     void copy_list(const List& other) {
         Node* current = other.head;
         while (current != nullptr) {
@@ -40,27 +40,27 @@ private:
     }
 
 public:
-    // Конструктор по умолчанию
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
     List() : head(nullptr), tail(nullptr), list_size(0) {}
 
-    // Конструктор со списком инициализации
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г±Г® Г±ГЇГЁГ±ГЄГ®Г¬ ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГЁ
     List(std::initializer_list<T> init_list) : head(nullptr), tail(nullptr), list_size(0) {
         for (const auto& item : init_list) {
             push_back(item);
         }
     }
 
-    // Копирующий конструктор
+    // ГЉГ®ГЇГЁГ°ГіГѕГ№ГЁГ© ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
     List(const List& other) : head(nullptr), tail(nullptr), list_size(0) {
         copy_list(other);
     }
 
-    // Деструктор
+    // Г„ГҐГ±ГІГ°ГіГЄГІГ®Г°
     ~List() {
         clear_list();
     }
 
-    // Добавление элемента в начало списка
+    // Г„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  Гў Г­Г Г·Г Г«Г® Г±ГЇГЁГ±ГЄГ 
     void push_front(const T& value) {
         Node* new_node = new Node(value);
 
@@ -74,7 +74,7 @@ public:
         list_size++;
     }
 
-    // Добавление элемента в конец списка
+    // Г„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  Гў ГЄГ®Г­ГҐГ¶ Г±ГЇГЁГ±ГЄГ 
     void push_back(const T& value) {
         Node* new_node = new Node(value);
 
@@ -88,7 +88,7 @@ public:
         list_size++;
     }
 
-    // Вставка элемента по позиции
+    // Г‚Г±ГІГ ГўГЄГ  ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЇГ® ГЇГ®Г§ГЁГ¶ГЁГЁ
     void insert(int position, const T& value) {
         if (position > list_size) {
             throw std::out_of_range("Position out of range");
@@ -114,7 +114,7 @@ public:
         }
     }
 
-    // Удаление элемента из начала списка
+    // Г“Г¤Г Г«ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЁГ§ Г­Г Г·Г Г«Г  Г±ГЇГЁГ±ГЄГ 
     void pop_front() {
         if (empty()) {
             throw std::out_of_range("List is empty");
@@ -131,7 +131,7 @@ public:
         list_size--;
     }
 
-    // Удаление элемента из конца списка
+    // Г“Г¤Г Г«ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЁГ§ ГЄГ®Г­Г¶Г  Г±ГЇГЁГ±ГЄГ 
     void pop_back() {
         if (empty()) {
             throw std::out_of_range("List is empty");
@@ -154,7 +154,7 @@ public:
         list_size--;
     }
 
-    // Удаление элемента по позиции
+    // Г“Г¤Г Г«ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЇГ® ГЇГ®Г§ГЁГ¶ГЁГЁ
     void erase(int position) {
         if (position >= list_size) {
             throw std::out_of_range("Position out of range");
@@ -180,7 +180,7 @@ public:
         }
     }
 
-    // Получение элемента по индексу
+    // ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі
     T& at(int index) {
         if (index >= list_size) {
             throw std::out_of_range("Index out of range");
@@ -205,7 +205,7 @@ public:
         return current->data;
     }
 
-    // Оператор [] для доступа по индексу
+    // ГЋГЇГҐГ°Г ГІГ®Г° [] Г¤Г«Гї Г¤Г®Г±ГІГіГЇГ  ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі
     T& operator[](int index) {
         return at(index);
     }
@@ -214,22 +214,22 @@ public:
         return at(index);
     }
 
-    // Проверка на пустоту
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГЇГіГ±ГІГ®ГІГі
     bool empty() const {
         return list_size == 0;
     }
 
-    // Размер списка
+    // ГђГ Г§Г¬ГҐГ° Г±ГЇГЁГ±ГЄГ 
     int size() const {
         return list_size;
     }
 
-    // Очистка списка
+    // ГЋГ·ГЁГ±ГІГЄГ  Г±ГЇГЁГ±ГЄГ 
     void clear() {
         clear_list();
     }
 
-    // Поиск элемента
+    // ГЏГ®ГЁГ±ГЄ ГЅГ«ГҐГ¬ГҐГ­ГІГ 
     int find(const T& value) const {
         Node* current = head;
         int index = 0;
@@ -244,7 +244,7 @@ public:
         return list_size;
     }
 
-    // Оператор присваивания
+    // ГЋГЇГҐГ°Г ГІГ®Г° ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГї
     List& operator=(const List& other) {
         if (this != &other) {
             clear_list();
@@ -253,7 +253,7 @@ public:
         return *this;
     }
 
-    // Оператор сравнения
+    // ГЋГЇГҐГ°Г ГІГ®Г° Г±Г°Г ГўГ­ГҐГ­ГЁГї
     bool operator==(const List& other) const {
         if (list_size != other.list_size) {
             return false;
@@ -276,7 +276,7 @@ public:
         return !(*this == other);
     }
 
-    // Класс итератора
+    // ГЉГ«Г Г±Г± ГЁГІГҐГ°Г ГІГ®Г°Г 
     class Iterator {
     private:
         Node* current;
@@ -310,7 +310,7 @@ public:
         }
     };
 
-    // Методы для итераторов
+    // ГЊГҐГІГ®Г¤Г» Г¤Г«Гї ГЁГІГҐГ°Г ГІГ®Г°Г®Гў
     Iterator begin() {
         return Iterator(head);
     }
@@ -319,7 +319,7 @@ public:
         return Iterator(nullptr);
     }
 
-    // Вывод списка
+    // Г‚Г»ГўГ®Г¤ Г±ГЇГЁГ±ГЄГ 
     friend std::ostream& operator<<(std::ostream& os, const List<T>& list) {
         os << "List (size: " << list.list_size << "): [";
         Node* current = list.head;
@@ -505,7 +505,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Queue<T>& queue) {
         os << "Queue (size: " << queue.size() << "): [";
         if (!queue.empty()) {
-            // Вывод от начала к концу
+            // Г‚Г»ГўГ®Г¤ Г®ГІ Г­Г Г·Г Г«Г  ГЄ ГЄГ®Г­Г¶Гі
             for (int i = 0; i < queue.list.size(); ++i) {
                 if (i > 0) os << ", ";
                 os << queue.list[i];
@@ -517,41 +517,3 @@ public:
 };
 
 
-
-
-
-
-int main() {
-    // Тестирование очереди
-    Queue<int> q1;
-    Queue<int> q2 = { 10, 20, 30, 40, 50 };
-
-    std::cout << "q2: " << q2 << std::endl;
-    std::cout << "Front: " << q2.front() << std::endl;  // 10
-    std::cout << "Back: " << q2.back() << std::endl;    // 50
-
-    // Добавление элементов
-    q2.push(60);
-    std::cout << "After push(60): " << q2 << std::endl;
-    std::cout << "New back: " << q2.back() << std::endl;  // 60
-
-    // Удаление элементов
-    q2.pop();
-    std::cout << "After pop(): " << q2 << std::endl;
-    std::cout << "New front: " << q2.front() << std::endl;  // 20
-
-    // Копирование
-    Queue<int> q3 = q2;
-    std::cout << "q3 (copy of q2): " << q3 << std::endl;
-
-    // Проверка равенства
-    std::cout << "q2 == q3: " << (q2 == q3) << std::endl;  // true
-
-
-    // Очистка
-    q3.clear();
-    std::cout << "q3 after clear: " << q3 << std::endl;
-    std::cout << "q3 empty: " << q3.empty() << std::endl;  // true
-
-    return 0;
-}
